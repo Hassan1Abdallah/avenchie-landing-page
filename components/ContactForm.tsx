@@ -70,7 +70,7 @@ export function ContactForm() {
               <Mail size={24} />
             </div>
             <h3 className="text-lg font-bold mb-2 text-foreground">البريد الإلكتروني</h3>
-            <p className="text-foreground/60">hello@avenchie.com</p>
+            <p className="text-foreground/60">hello@Autoagen.com</p>
           </motion.div>
 
           <motion.div

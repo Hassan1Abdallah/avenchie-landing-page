@@ -23,7 +23,7 @@ const scenarios: Scenario[] = [
   {
     title: 'Website Development',
     messages: [
-      { type: 'bot', text: 'مرحبًا 👋\nأهلًا بك في Avenchie.\nكيف يمكنني مساعدتك اليوم؟' },
+      { type: 'bot', text: 'مرحبًا 👋\nأهلًا بك في Autoagen.\nكيف يمكنني مساعدتك اليوم؟' },
       { type: 'customer', text: 'أحتاج موقع إلكتروني لشركة عقارات.' },
       { type: 'bot', text: 'ممتاز.\nهل لديك هوية بصرية أو لوجو حالي؟' },
       { type: 'customer', text: 'نعم' },
@@ -47,7 +47,7 @@ const scenarios: Scenario[] = [
   {
     title: 'Automation',
     messages: [
-      { type: 'bot', text: 'Hello 👋\nWelcome to Avenchie.\nHow can I help you today?' },
+      { type: 'bot', text: 'Hello 👋\nWelcome to Autoagen.\nHow can I help you today?' },
       { type: 'customer', text: 'I want to automate customer support.' },
       { type: 'bot', text: 'Great!\nDo you currently use WhatsApp Business?' },
       { type: 'customer', text: 'Yes' },
@@ -251,10 +251,10 @@ export function DemoChatSection() {
           <motion.div
             initial={{ scale: 0.9 }}
             whileInView={{ scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 rounded-full border border-green-200 mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-4"
           >
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-sm font-medium text-green-700">Interactive Demo</span>
+            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-secondary">Interactive Demo</span>
           </motion.div>
 
          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-900 mb-4 text-balance">
@@ -282,16 +282,16 @@ export function DemoChatSection() {
               className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-brand-orange to-brand-tangerine rounded-lg flex items-center justify-center">
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Avenchie AI Assistant</p>
+                  <p className="text-sm font-semibold text-gray-900">Autoagen AI Assistant</p>
                   <p className="text-xs text-gray-500">{currentScenario.title}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 <span className="text-xs font-medium text-gray-600">Online</span>
               </div>
             </motion.div>
@@ -318,7 +318,7 @@ export function DemoChatSection() {
                       <div
                         className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${
                           message.type === 'bot'
-                            ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
+                            ? 'bg-gradient-to-br from-brand-orange to-brand-tangerine text-white'
                             : 'bg-gray-200 text-gray-700'
                         }`}
                       >
@@ -328,7 +328,7 @@ export function DemoChatSection() {
                         className={`px-4 py-3 rounded-2xl ${
                           message.type === 'bot'
                             ? 'bg-gray-100 text-gray-900'
-                            : 'bg-blue-600 text-white'
+                            : 'bg-primary text-white'
                         }`}
                       >
                         <p className="text-sm whitespace-pre-wrap break-words">
@@ -357,7 +357,7 @@ exit={{ opacity:0 }}
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                           typingUser === 'bot'
-                            ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white'
+                            ? 'bg-gradient-to-br from-brand-orange to-brand-tangerine text-white'
                             : 'bg-gray-200 text-gray-700'
                         }`}
                       >
@@ -368,7 +368,7 @@ exit={{ opacity:0 }}
                         className={`px-4 py-3 rounded-2xl ${
                           typingUser === 'bot'
                             ? 'bg-gray-100'
-                            : 'bg-blue-600'
+                            : 'bg-primary'
                         }`}
                       >
                         <TypingIndicator />
@@ -405,7 +405,7 @@ exit={{ opacity:0 }}
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full px-4 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                    className="w-full px-4 py-3 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition-colors"
                   >
                     Send Request
                   </motion.button>
@@ -421,7 +421,7 @@ exit={{ opacity:0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
-                  className="px-6 py-8 border-t border-gray-100 bg-gradient-to-br from-green-50 to-emerald-50 flex flex-col items-center justify-center text-center"
+                  className="px-6 py-8 border-t border-gray-100 bg-gradient-to-br from-primary/10 to-brand-silver/40 flex flex-col items-center justify-center text-center"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
@@ -433,7 +433,7 @@ exit={{ opacity:0 }}
                     }}
                     className="mb-4"
                   >
-                    <CheckCircle2 className="w-12 h-12 text-green-500" />
+                    <CheckCircle2 className="w-12 h-12 text-primary" />
                   </motion.div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     Request Sent Successfully

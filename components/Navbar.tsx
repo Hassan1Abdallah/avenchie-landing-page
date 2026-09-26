@@ -26,19 +26,19 @@ export function Navbar() {
         <div className="flex justify-between items-center h-20">
           
           <div className="flex items-center gap-3 min-w-fit">
-            <div className="w-10 h-10 flex items-center justify-center">
+            <div className="w-15 h-15 flex items-center justify-center">
               <Image
-                src="/logo1.png"
-                alt="Avenchie Logo"
+                src="/logoAutoagen.png"
+                alt="Autoagen Logo"
                 width={50}
                 height={50}
-                className="w-13 h-13 object-contain"
+                className="w-15 h-15 object-contain"
                 priority
               />
             </div>
 
             <span className="font-bold text-xl text-foreground hidden sm:inline">
-              Avenchie
+              Autoagen
             </span>
           </div>
 

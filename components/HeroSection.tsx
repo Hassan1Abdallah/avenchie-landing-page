@@ -146,17 +146,17 @@ export function HeroSection() {
 
           <motion.div variants={itemVariants} className="pt-4 flex items-center gap-4 flex-wrap">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <div className="w-3 h-3 rounded-full bg-brand-orange"></div>
               <span className="text-sm text-foreground/60">حلول مخصصة لاحتياجك</span>
             </div>
             
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <div className="w-3 h-3 rounded-full bg-brand-orange"></div>
               <span className="text-sm text-foreground/60">تكامل مع أنظمتك الحالية</span>
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <div className="w-3 h-3 rounded-full bg-brand-orange"></div>
               <span className="text-sm text-foreground/60">دعم فني مستمر</span>
             </div>
 

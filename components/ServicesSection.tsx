@@ -10,7 +10,7 @@ const services = [
     description:
       'نبني أنظمة أتمتة ذكية تقلل المهام اليدوية، وتربط العمليات ببعض، وتزيد كفاءة فريقك وإنتاجيته.',
     icon: Cog,
-    gradient: 'from-blue-500 to-blue-600',
+    gradient: 'from-brand-orange to-brand-tangerine',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const services = [
     description:
       'نصمم ونخصص أنظمة CRM لإدارة العملاء، متابعة المبيعات، وتنظيم جميع مراحل رحلة العميل في مكان واحد.',
     icon: Database,
-    gradient: 'from-purple-500 to-purple-600',
+    gradient: 'from-brand-tangerine to-brand-rust',
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const services = [
     description:
       'نبني مواقع إلكترونية احترافية، سريعة، ومتجاوبة تعكس هوية نشاطك وتساعدك على تحويل الزوار إلى عملاء.',
     icon: Globe,
-    gradient: 'from-cyan-500 to-cyan-600',
+    gradient: 'from-brand-rust to-brand-brown',
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const services = [
     description:
       'نوصل موقعك، الـ CRM، وأدوات العمل المختلفة في نظام واحد يعمل بسلاسة ويضمن تدفق البيانات تلقائياً.',
     icon: Link2,
-    gradient: 'from-pink-500 to-pink-600',
+    gradient: 'from-brand-gray to-brand-charcoal',
   },
 ]
 
@@ -101,7 +101,7 @@ export function ServicesSection() {
                 variants={itemVariants}
                 whileHover={{
                   y: -8,
-                  boxShadow: '0 20px 40px rgba(37, 99, 235, 0.15)',
+                  boxShadow: '0 20px 40px rgba(255, 75, 27, 0.15)',
                 }}
                 className="group bg-white border border-border rounded-[1.75rem] p-6 sm:p-8 hover:border-primary/50 transition-all duration-300 cursor-pointer"
               >

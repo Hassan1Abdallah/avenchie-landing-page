@@ -56,9 +56,9 @@ export function ParticleBackground() {
     const animate = () => {
       // Clear canvas with gradient background
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
-      gradient.addColorStop(0, 'rgba(15, 23, 42, 1)')
-      gradient.addColorStop(0.5, 'rgba(25, 30, 50, 1)')
-      gradient.addColorStop(1, 'rgba(15, 23, 42, 1)')
+      gradient.addColorStop(0, 'rgba(17, 17, 19, 1)')
+      gradient.addColorStop(0.5, 'rgba(45, 44, 44, 1)')
+      gradient.addColorStop(1, 'rgba(17, 17, 19, 1)')
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -85,13 +85,13 @@ export function ParticleBackground() {
         }
 
         // Draw particle
-        ctx.fillStyle = `rgba(37, 99, 235, ${particle.opacity})`
+        ctx.fillStyle = `rgba(255, 75, 27, ${particle.opacity})`
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fill()
 
         // Draw glow
-        ctx.strokeStyle = `rgba(124, 58, 237, ${particle.opacity * 0.5})`
+        ctx.strokeStyle = `rgba(208, 74, 35, ${particle.opacity * 0.5})`
         ctx.lineWidth = 0.5
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size + 2, 0, Math.PI * 2)
@@ -106,7 +106,7 @@ export function ParticleBackground() {
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           if (distance < 200) {
-            ctx.strokeStyle = `rgba(37, 99, 235, ${0.1 * (1 - distance / 200)})`
+            ctx.strokeStyle = `rgba(255, 75, 27, ${0.1 * (1 - distance / 200)})`
             ctx.lineWidth = 0.5
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)

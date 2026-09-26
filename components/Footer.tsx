@@ -33,7 +33,7 @@ export function Footer() {
 };
 
   return (
-    <footer className="bg-slate-900 text-white">
+    <footer className="bg-brand-charcoal text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <motion.div
           variants={containerVariants}
@@ -109,7 +109,7 @@ export function Footer() {
             <div className="space-y-3 mb-6">
               <p className="text-white/60">
                 <span className="block text-sm font-semibold mb-1">البريد الإلكتروني</span>
-                hello@avenchie.com
+                hello@Autoagen.tech
               </p>
               <p className="text-white/60">
                 <span className="block text-sm font-semibold mb-1">الهاتف</span>

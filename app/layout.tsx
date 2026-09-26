@@ -9,26 +9,26 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/Avenchie_icon.png',
+        url: '/logoAutoagen.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/Avenchie_icon.png',
+        url: '/logoAutoagen.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/Logo_Avenchie.png',
+        url: '/logoAutoagen.png',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/Avenchie_icon.png',
+    apple: '/logoAutoagen.png',
   },
 }
 
 export const viewport: Viewport = {
   colorScheme: 'light',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#2563EB' },
+    { media: '(prefers-color-scheme: light)', color: '#ff4b1b' },
   ],
 }
 
