@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, type Variants } from 'framer-motion';
 import { ChevronRight } from 'lucide-react'
+import { useSitePreferences } from '@/lib/site-preferences'
 
 
 export function HeroSection() {
+  const { consultationUrl, t } = useSitePreferences()
   const containerRef = useRef<HTMLDivElement>(null)
   const [displayedText, setDisplayedText] = useState('')
-  const fullText = 'حوّل عملك بالذكاء الاصطناعي'
+  const fullText = t('حوّل عملك بالذكاء الاصطناعي')
 
 
   
@@ -26,7 +28,7 @@ export function HeroSection() {
       }
     }, 100)
     return () => clearInterval(interval)
-  }, [])
+  }, [fullText])
 
   // Floating animation for 3D element
   useEffect(() => {
@@ -118,21 +120,21 @@ export function HeroSection() {
             variants={itemVariants}
             className="text-base sm:text-lg text-foreground/70 leading-relaxed max-w-xl mx-auto md:mx-0 text-balance"
           >
-            نبني حلولًا رقمية متكاملة تجمع بين أتمتة الأنظمة، أنظمة CRM، وتطوير المواقع
-            الإلكترونية، لنساعد شركتك على العمل بكفاءة أعلى، وتقديم تجربة أفضل لعملائك،
-            والاستعداد للنمو بثقة.
+            {t('نبني حلولًا رقمية متكاملة تجمع بين أتمتة الأنظمة، أنظمة CRM، وتطوير المواقع الإلكترونية، لنساعد شركتك على العمل بكفاءة أعلى، وتقديم تجربة أفضل لعملائك، والاستعداد للنمو بثقة.')}
+            {/* The complete translated copy is kept in the locale dictionary. */}
+            {/* The original line breaks are intentionally replaced by one responsive paragraph. */}
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
             <motion.a
               whileHover={{ scale: 1.05, boxShadow: '0 20px 25px -5px rgba(37, 99, 235, 0.3)' }}
               whileTap={{ scale: 0.95 }}
-              href="https://wa.me/201017209315?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%2C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%0A%D9%85%D8%A7%20%D8%A7%D9%84%D8%A3%D9%88%D9%82%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AD%D8%A9%20%D9%84%D9%83%D9%85"
+              href={consultationUrl}
               target="_blank"
               rel="noreferrer"
               className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-semibold flex items-center justify-center gap-2 hover:shadow-xl transition-all duration-300"
             >
-              احجز استشارتك المجانية الآن
+              {t('احجز استشارتك المجانية الآن')}
               <ChevronRight size={20} />
             </motion.a>
             {/* <motion.button
@@ -147,17 +149,17 @@ export function HeroSection() {
           <motion.div variants={itemVariants} className="pt-4 flex items-center gap-4 flex-wrap">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-brand-orange"></div>
-              <span className="text-sm text-foreground/60">حلول مخصصة لاحتياجك</span>
+              <span className="text-sm text-foreground/60">{t('حلول مخصصة لاحتياجك')}</span>
             </div>
             
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-brand-orange"></div>
-              <span className="text-sm text-foreground/60">تكامل مع أنظمتك الحالية</span>
+              <span className="text-sm text-foreground/60">{t('تكامل مع أنظمتك الحالية')}</span>
             </div>
 
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-brand-orange"></div>
-              <span className="text-sm text-foreground/60">دعم فني مستمر</span>
+              <span className="text-sm text-foreground/60">{t('دعم فني مستمر')}</span>
             </div>
 
           </motion.div>

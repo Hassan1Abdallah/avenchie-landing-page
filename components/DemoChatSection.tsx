@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, CheckCircle2 } from 'lucide-react';
+import { useSitePreferences } from '@/lib/site-preferences';
 
 interface Message {
   id: string;
@@ -74,7 +75,7 @@ const TypingIndicator = () => (
           delay: i * 0.1,
           repeat: Infinity,
         }}
-        className="w-2 h-2 bg-gray-400 rounded-full"
+        className="w-2 h-2 bg-muted-foreground/60 rounded-full"
       />
     ))}
   </motion.div>
@@ -108,6 +109,7 @@ const TypewriterMessage = ({
 };
 
 export function DemoChatSection() {
+  const { language, t } = useSitePreferences();
   const [scenarioIndex, setScenarioIndex] = useState(0);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -118,7 +120,16 @@ export function DemoChatSection() {
   const [messageIndex, setMessageIndex] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const startedMessagesRef = useRef(new Set<string>());
   const currentScenario = scenarios[scenarioIndex];
+
+  useEffect(() => {
+    startedMessagesRef.current.clear();
+    setMessages([]);
+    setMessageIndex(0);
+    setShowForm(false);
+    setShowSuccess(false);
+  }, [language]);
   
   // Auto-scroll to bottom
   // useEffect(() => {
@@ -163,13 +174,15 @@ export function DemoChatSection() {
 
           const typingTimer = setTimeout(() => {
             const messageId = `${scenarioIndex}-${messageIndex}`;
+            if (startedMessagesRef.current.has(messageId)) return;
+            startedMessagesRef.current.add(messageId);
 
             setMessages((prev) => [
               ...prev,
               {
                 id: messageId,
                 type: currentMessage.type,
-                text: currentMessage.text,
+                text: t(currentMessage.text),
                 displayedText: '',
               },
             ]);
@@ -187,7 +200,7 @@ export function DemoChatSection() {
                   msg.id === messageId
                     ? {
                         ...msg,
-                        displayedText: currentMessage.text.slice(0, charIndex),
+                        displayedText: t(currentMessage.text).slice(0, charIndex),
                       }
                     : msg
                 )
@@ -213,6 +226,7 @@ export function DemoChatSection() {
         showForm,
         showSuccess,
         scenarioIndex,
+        t,
       ]);
 
   // Form submission logic
@@ -228,6 +242,7 @@ export function DemoChatSection() {
           setMessageIndex(0);
           setTypingUser(null);
           setIsTyping(false);
+          startedMessagesRef.current.clear();
           setScenarioIndex((prev) => (prev + 1) % scenarios.length);
         }, 3000);
 
@@ -239,7 +254,7 @@ export function DemoChatSection() {
   }, [showForm, showSuccess]);
 
   return (
-    <section id="DemoChatSection" className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+    <section id="DemoChatSection" className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/30 to-background">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -254,15 +269,15 @@ export function DemoChatSection() {
             className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-4"
           >
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm font-medium text-secondary">Interactive Demo</span>
+            <span className="text-sm font-medium text-secondary">{t('تجربة المساعد التفاعلي')}</span>
           </motion.div>
 
-         <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-900 mb-4 text-balance">
-          ليست مجرد محادثة... بل نظام يعمل نيابة عنك
+         <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
+          {t('ليست مجرد محادثة... بل نظام يعمل نيابة عنك')}
         </h2>
 
-<p className="text-lg text-gray-600 max-w-1xl mx-auto leading-8">
-  هذا العرض التفاعلي يمثل جزءاً من حلولنا المتكاملة التي تشمل أتمتة العمليات، إدارة العملاء (CRM)، وتطوير المواقع.
+<p className="text-lg text-foreground/70 max-w-1xl mx-auto leading-8">
+  {t('هذا العرض التفاعلي يمثل جزءاً من حلولنا المتكاملة التي تشمل أتمتة العمليات، إدارة العملاء (CRM)، وتطوير المواقع.')}
 </p>
         </motion.div>
 
@@ -273,31 +288,31 @@ export function DemoChatSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-2xl mx-auto"
         >
-          <div className="bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden">
+          <div className="bg-card text-card-foreground rounded-3xl border border-border shadow-xl overflow-hidden">
             {/* Chat Header */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50"
+              className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted/50"
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-brand-orange to-brand-tangerine rounded-lg flex items-center justify-center">
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Autoagen AI Assistant</p>
-                  <p className="text-xs text-gray-500">{currentScenario.title}</p>
+                  <p className="text-sm font-semibold text-foreground">Autoagen AI Assistant</p>
+                  <p className="text-xs text-muted-foreground">{t(currentScenario.title)}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                <span className="text-xs font-medium text-gray-600">Online</span>
+                <span className="text-xs font-medium text-muted-foreground">{t('Online')}</span>
               </div>
             </motion.div>
 
             {/* Messages Container */}
-            <div ref={chatContainerRef} className="h-96 overflow-x-hidden overflow-y-auto px-6 py-6 flex flex-col gap-4 bg-white">
+            <div ref={chatContainerRef} className="h-96 overflow-x-hidden overflow-y-auto px-6 py-6 flex flex-col gap-4 bg-card">
               <AnimatePresence  mode="popLayout" >
                 {messages.map((message, idx) => (
                   <motion.div
@@ -319,15 +334,15 @@ export function DemoChatSection() {
                         className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${
                           message.type === 'bot'
                             ? 'bg-gradient-to-br from-brand-orange to-brand-tangerine text-white'
-                            : 'bg-gray-200 text-gray-700'
+                            : 'bg-muted text-foreground'
                         }`}
                       >
-                        {message.type === 'bot' ? 'AI' : 'You'}
+                        {message.type === 'bot' ? 'AI' : t('You')}
                       </div>
                       <div
                         className={`px-4 py-3 rounded-2xl ${
                           message.type === 'bot'
-                            ? 'bg-gray-100 text-gray-900'
+                            ? 'bg-muted text-foreground'
                             : 'bg-primary text-white'
                         }`}
                       >
@@ -358,16 +373,16 @@ exit={{ opacity:0 }}
                         className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                           typingUser === 'bot'
                             ? 'bg-gradient-to-br from-brand-orange to-brand-tangerine text-white'
-                            : 'bg-gray-200 text-gray-700'
+                            : 'bg-muted text-foreground'
                         }`}
                       >
-                        {typingUser === 'bot' ? 'AI' : 'You'}
+                        {typingUser === 'bot' ? 'AI' : t('You')}
                       </div>
 
                       <div
                         className={`px-4 py-3 rounded-2xl ${
                           typingUser === 'bot'
-                            ? 'bg-gray-100'
+                            ? 'bg-muted'
                             : 'bg-primary'
                         }`}
                       >
@@ -388,26 +403,26 @@ exit={{ opacity:0 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="px-6 py-6 border-t border-gray-100 bg-gray-50 space-y-4"
+                  className="px-6 py-6 border-t border-border bg-muted/50 space-y-4"
                 >
                   <input
                     type="text"
                     defaultValue="Ahmed Mohamed"
                     disabled
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 text-sm disabled:opacity-60"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground text-sm disabled:opacity-60"
                   />
                   <input
                     type="tel"
                     defaultValue="01012345678"
                     disabled
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 text-sm disabled:opacity-60"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground text-sm disabled:opacity-60"
                   />
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full px-4 py-3 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition-colors"
                   >
-                    Send Request
+                    {t('Send Request')}
                   </motion.button>
                 </motion.div>
               )}
@@ -435,13 +450,13 @@ exit={{ opacity:0 }}
                   >
                     <CheckCircle2 className="w-12 h-12 text-primary" />
                   </motion.div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    Request Sent Successfully
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                    {t('Request Sent Successfully')}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Our team will contact you shortly.
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {t('Our team will contact you shortly.')}
                   </p>
-                  <p className="text-xs font-mono text-gray-500">Order #{orderNumber}</p>
+                  <p className="text-xs font-mono text-muted-foreground">{t('Order')} #{orderNumber}</p>
                 </motion.div>
               )}
             </AnimatePresence>

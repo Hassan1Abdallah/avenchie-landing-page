@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, type Variants } from 'framer-motion';
+import { useSitePreferences } from '@/lib/site-preferences'
 
 const steps = [
   {
@@ -26,6 +27,7 @@ const steps = [
 ]
 
 export function HowItWorksSection() {
+  const { t } = useSitePreferences()
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -63,10 +65,10 @@ export function HowItWorksSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            كيف نعمل
+            {t('كيف نعمل')}
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-            عملية واضحة وموثقة لضمان نجاح مشروعك
+            {t('عملية واضحة وموثقة لضمان نجاح مشروعك')}
           </p>
         </motion.div>
 
@@ -81,7 +83,7 @@ export function HowItWorksSection() {
             <motion.div
               key={step.number}
               variants={itemVariants}
-              className="relative overflow-hidden rounded-[2rem] border border-border bg-white/90 p-6 shadow-sm backdrop-blur-md transition hover:-translate-y-1 hover:shadow-md md:p-8"
+              className="relative overflow-hidden rounded-[2rem] border border-border bg-card/90 text-card-foreground p-6 shadow-sm backdrop-blur-md transition hover:-translate-y-1 hover:shadow-md md:p-8"
             >
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute left-1/2 top-full h-20 w-1 -translate-x-1/2 rounded-full bg-gradient-to-b from-primary to-secondary/30"></div>
@@ -92,9 +94,9 @@ export function HowItWorksSection() {
                   {step.number}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-foreground">{step.title}</h3>
+                  <h3 className="text-2xl font-bold text-foreground">{t(step.title)}</h3>
                   <p className="mt-3 text-foreground/65 leading-relaxed">
-                    {step.description}
+                    {t(step.description)}
                   </p>
                 </div>
               </div>

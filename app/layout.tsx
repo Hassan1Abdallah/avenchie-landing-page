@@ -1,5 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { SitePreferencesProvider } from '@/lib/site-preferences'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -26,9 +27,10 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light',
+  colorScheme: 'light dark',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ff4b1b' },
+    { media: '(prefers-color-scheme: dark)', color: '#242424' },
   ],
 }
 
@@ -38,10 +40,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ar" dir="rtl" className="light bg-background scroll-smooth">
+    <html lang="ar" dir="rtl" className="light bg-background scroll-smooth" suppressHydrationWarning>
       <body className="antialiased bg-background text-foreground">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <SitePreferencesProvider>
+          {children}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </SitePreferencesProvider>
       </body>
     </html>
   )

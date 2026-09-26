@@ -1,18 +1,25 @@
 'use client'
 
 import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Languages, Menu, Moon, Sun, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useSitePreferences } from '@/lib/site-preferences'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const { language, theme, consultationUrl, toggleLanguage, toggleTheme, t } = useSitePreferences()
+  const languageLabel = language === 'ar' ? 'English' : 'العربية'
+  const languageAction = language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'
+  const themeAction = language === 'ar'
+    ? theme === 'light' ? 'تفعيل الوضع الداكن' : 'تفعيل الوضع الفاتح'
+    : theme === 'light' ? 'Enable dark mode' : 'Enable light mode'
 
   const navLinks = [
-    { label: 'الخدمات', href: '#services' },
-    { label: 'كيف نعمل', href: '#how-it-works' },
-    { label: 'تجربة تفاعلية', href: '#DemoChatSection' },
-    { label: 'الأسئلة الشائعة', href: '#faq' },
+    { label: t('الخدمات'), href: '#services' },
+    { label: t('كيف نعمل'), href: '#how-it-works' },
+    { label: t('تجربة تفاعلية'), href: '#DemoChatSection' },
+    { label: t('الأسئلة الشائعة'), href: '#faq' },
   ]
 
   return (
@@ -55,15 +62,34 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                aria-label={languageAction}
+                title={languageAction}
+                className="inline-flex items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
+              >
+                <Languages size={18} />
+                <span>{languageLabel}</span>
+              </button>
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={themeAction}
+                title={themeAction}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted transition-colors"
+              >
+                {theme === 'light' ? <Moon size={19} /> : <Sun size={19} />}
+              </button>
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://wa.me/201017209315?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%2C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%0A%D9%85%D8%A7%20%D8%A7%D9%84%D8%A3%D9%88%D9%82%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AD%D8%A9%20%D9%84%D9%83%D9%85"
+              href={consultationUrl}
               target="_blank"
               rel="noreferrer"
               className="hidden sm:inline-flex px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-semibold hover:shadow-lg transition-shadow duration-300"
             >
-              احجز استشارتك
+              {t('احجز استشارتك')}
             </motion.a>
 
             <button
@@ -93,13 +119,21 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href="https://wa.me/201017209315?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%2C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%0A%D9%85%D8%A7%20%D8%A7%D9%84%D8%A3%D9%88%D9%82%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AD%D8%A9%20%D9%84%D9%83%D9%85"
+              href={consultationUrl}
               target="_blank"
               rel="noreferrer"
               className="w-full mt-4 inline-flex px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-sm font-semibold hover:shadow-lg transition-shadow duration-300 justify-center"
             >
-              احجز استشارتك
+              {t('احجز استشارتك')}
             </a>
+            <div className="flex items-center justify-center gap-3 pt-2">
+              <button type="button" onClick={toggleLanguage} className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-muted">
+                <Languages size={18} /> {languageLabel}
+              </button>
+              <button type="button" onClick={toggleTheme} aria-label={themeAction} title={themeAction} className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-muted">
+                {theme === 'light' ? <Moon size={19} /> : <Sun size={19} />}
+              </button>
+            </div>
           </motion.div>
         )}
       </div>

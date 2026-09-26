@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { Cog, Clock, Headphones, ShieldCheck } from 'lucide-react'
+import { useSitePreferences } from '@/lib/site-preferences'
 
 const benefits = [
   {
@@ -35,6 +36,7 @@ const benefits = [
 ]
 
 export function BenefitsSection() {
+  const { t } = useSitePreferences()
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -72,13 +74,11 @@ export function BenefitsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            لماذا تختارنا؟
+            {t('لماذا تختارنا؟')}
           </h2>
 
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-            نساعد الشركات على بناء حلول تقنية حديثة تجمع بين المواقع
-            الإلكترونية، أنظمة CRM، وأتمتة العمليات لتحقيق تجربة عمل أكثر
-            كفاءة.
+            {t('نساعد الشركات على بناء حلول تقنية حديثة تجمع بين المواقع الإلكترونية، أنظمة CRM، وأتمتة العمليات لتحقيق تجربة عمل أكثر كفاءة.')}
           </p>
         </motion.div>
 
@@ -100,18 +100,18 @@ export function BenefitsSection() {
                   y: -8,
                   boxShadow: '0 20px 40px rgba(37, 99, 235, 0.12)',
                 }}
-                className="bg-white border border-border rounded-[1.75rem] p-6 sm:p-8 text-center hover:border-primary/50 transition-all duration-300 group"
+                className="bg-card text-card-foreground border border-border rounded-[1.75rem] p-6 sm:p-8 text-center hover:border-primary/50 transition-all duration-300 group"
               >
                 <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <IconComponent className="w-8 h-8 text-primary" />
                 </div>
 
                 <h3 className="text-xl font-bold text-foreground mb-4">
-                  {benefit.title}
+                  {t(benefit.title)}
                 </h3>
 
                 <p className="text-foreground/60 leading-relaxed">
-                  {benefit.description}
+                  {t(benefit.description)}
                 </p>
               </motion.div>
             )
@@ -126,7 +126,7 @@ export function BenefitsSection() {
           className="mt-16 text-center"
         >
           <p className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto">
-            جاهز تحول فكرتك إلى نظام متكامل يدير أعمالك بكفاءة؟
+            {t('جاهز تحول فكرتك إلى نظام متكامل يدير أعمالك بكفاءة؟')}
           </p>
 
           <motion.button
@@ -134,7 +134,7 @@ export function BenefitsSection() {
             whileTap={{ scale: 0.95 }}
             className="px-10 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-semibold hover:shadow-lg transition-shadow duration-300"
           >
-            احجز استشارة مجانية
+            {t('احجز استشارة مجانية')}
           </motion.button>
         </motion.div>
       </div>

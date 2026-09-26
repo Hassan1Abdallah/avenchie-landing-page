@@ -2,8 +2,10 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { Mail, Globe, Heart, Eye } from 'lucide-react'
+import { useSitePreferences } from '@/lib/site-preferences'
 
 export function Footer() {
+  const { t } = useSitePreferences()
   const currentYear = new Date().getFullYear()
 
   const containerVariants = {
@@ -50,26 +52,26 @@ export function Footer() {
               <h3 className="font-bold text-lg">Avenchie</h3>
             </div>
             <p className="text-white/60 leading-relaxed">
-              وكالة متخصصة في حلول أتمتة الذكاء الاصطناعي لتحويل عملك وزيادة كفاءتك.
+              {t('وكالة متخصصة في حلول أتمتة الذكاء الاصطناعي لتحويل عملك وزيادة كفاءتك.')}
             </p>
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h4 className="font-bold mb-6 text-lg">روابط سريعة</h4>
+            <h4 className="font-bold mb-6 text-lg">{t('روابط سريعة')}</h4>
             <ul className="space-y-3">
               <li>
                 <a href="#services" className="text-white/60 hover:text-primary transition-colors duration-300">
-                  الخدمات
+                  {t('الخدمات')}
                 </a>
               </li>
               <li>
                 <a href="#how-it-works" className="text-white/60 hover:text-primary transition-colors duration-300">
-                  كيف نعمل
+                  {t('كيف نعمل')}
                 </a>
               </li>
               <li>
                 <a href="#DemoChatSection" className="text-white/60 hover:text-primary transition-colors duration-300">
-                 Demo
+                 {t('تجربة تفاعلية')}
                 </a>
               </li>
               
@@ -105,14 +107,14 @@ export function Footer() {
 
           {/* Contact  */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-bold mb-6 text-lg">تواصل معنا</h4>
+            <h4 className="font-bold mb-6 text-lg">{t('تواصل معنا')}</h4>
             <div className="space-y-3 mb-6">
               <p className="text-white/60">
-                <span className="block text-sm font-semibold mb-1">البريد الإلكتروني</span>
+                <span className="block text-sm font-semibold mb-1">{t('البريد الإلكتروني')}</span>
                 hello@Autoagen.tech
               </p>
               <p className="text-white/60">
-                <span className="block text-sm font-semibold mb-1">الهاتف</span>
+                <span className="block text-sm font-semibold mb-1">{t('الهاتف')}</span>
                 201017209315+
               </p>
             </div>
@@ -165,7 +167,7 @@ export function Footer() {
             className="flex flex-col md:flex-row justify-between items-center gap-4 text-white/60 text-sm"
           >
             <p>
-              &copy; {currentYear} Avenchie. جميع الحقوق محفوظة.
+              &copy; {currentYear} Avenchie. {t('جميع الحقوق محفوظة.')}
             </p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-primary transition-colors duration-300">
