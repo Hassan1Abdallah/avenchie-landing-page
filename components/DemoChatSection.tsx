@@ -297,11 +297,15 @@ export function DemoChatSection() {
               className="flex items-center justify-between px-6 py-4 border-b border-border bg-muted/50"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-brand-orange to-brand-tangerine rounded-lg flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
+                  <img
+                    src="/logoAutoagen.png"
+                    alt="Autoagen"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Autoagen AI Assistant</p>
+                  <p className="text-sm font-semibold text-foreground">Autoagen AI</p>
                   <p className="text-xs text-muted-foreground">{t(currentScenario.title)}</p>
                 </div>
               </div>
@@ -331,14 +335,22 @@ export function DemoChatSection() {
                       }`}
                     >
                       <div
-                        className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${
-                          message.type === 'bot'
-                            ? 'bg-gradient-to-br from-brand-orange to-brand-tangerine text-white'
-                            : 'bg-muted text-foreground'
-                        }`}
-                      >
-                        {message.type === 'bot' ? 'AI' : t('You')}
-                      </div>
+                      className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold ${
+                        message.type === 'bot'
+                          ? 'bg-white'
+                          : 'bg-muted text-foreground'
+                      }`}
+                    >
+                      {message.type === 'bot' ? (
+                        <img
+                          src="/logoAutoagen.png"
+                          alt="Autoagen"
+                          className="w-6 h-6 object-contain"
+                        />
+                      ) : (
+                        t('You')
+                      )}
+                    </div>
                       <div
                         className={`px-4 py-3 rounded-2xl ${
                           message.type === 'bot'
@@ -372,11 +384,19 @@ exit={{ opacity:0 }}
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                           typingUser === 'bot'
-                            ? 'bg-gradient-to-br from-brand-orange to-brand-tangerine text-white'
-                            : 'bg-muted text-foreground'
+                            ? 'bg-white'
+                          : 'bg-muted text-foreground'
                         }`}
                       >
-                        {typingUser === 'bot' ? 'AI' : t('You')}
+                        {typingUser === 'bot' ? (
+                                    <img
+                                      src="/logoAutoagen.png"
+                                      alt="Autoagen"
+                                      className="w-6 h-6 object-contain"
+                                    />
+                                  ) : (
+                                    t('You')
+                                  )}
                       </div>
 
                       <div
